@@ -1,5 +1,7 @@
-package backend.academy;
+package backend.academy.processor;
 
+import backend.academy.LogRecord;
+import backend.academy.LogReport;
 import lombok.extern.log4j.Log4j2;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -16,7 +18,7 @@ import java.util.stream.Stream;
 public class HttpLogProcessor implements LogProcessor {
 
     @Override
-    public void processLogStream(String path, LocalDate fromDate, LocalDate toDate) {
+    public LogReport processLogStream(String path, LocalDate fromDate, LocalDate toDate) {
 
         try (HttpClient client = HttpClient.newHttpClient()) {
 
@@ -33,12 +35,12 @@ public class HttpLogProcessor implements LogProcessor {
                         logAnalyzer.updateLogReport(path, fromDate, toDate, records);
                     }
                 }
-
             } catch (IOException | InterruptedException ex) {
                 log.error(ex.getMessage());
             }
         } catch (Exception ex) {
             log.error(ex.getMessage());
         }
+        return logAnalyzer.logReport();
     }
 }

@@ -1,4 +1,8 @@
-package backend.academy;
+package backend.academy.processor;
+
+import backend.academy.LogAnalyzer;
+import backend.academy.LogRecord;
+import backend.academy.LogReport;
 
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
@@ -12,7 +16,7 @@ public interface LogProcessor {
     LogAnalyzer logAnalyzer = new LogAnalyzer();
 
     /// Метод для поточной обработки логов по указанному пути.
-    void processLogStream(String path, LocalDate fromDateStr, LocalDate toDateStr);
+    LogReport processLogStream(String path, LocalDate fromDateStr, LocalDate toDateStr);
 
     /// Метод для преобразования строки лога в объект LogRecord (для обработки данных в логе).
     static LogRecord parseLogLine(String line) {

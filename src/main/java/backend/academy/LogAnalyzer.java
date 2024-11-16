@@ -3,6 +3,7 @@ package backend.academy;
 import lombok.Getter;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
+import java.time.ZoneOffset;
 import java.util.stream.Stream;
 
 /// Класс для формирования LogReport по потоку логов.
@@ -15,16 +16,25 @@ public class LogAnalyzer {
 
         logReport.updateFiles(file);
 
+        OffsetDateTime offsetFromDate;
+        OffsetDateTime offsetToDate;
+
         if (fromDate != null) {
             logReport.updateFromDate(fromDate);
+            offsetFromDate = fromDate.atStartOfDay(ZoneOffset.UTC).toOffsetDateTime();
+        } else {
+            offsetFromDate = OffsetDateTime.MIN;
         }
         if (toDate != null) {
             logReport.updateToDate(toDate);
+            offsetToDate = toDate.atStartOfDay(ZoneOffset.UTC).toOffsetDateTime();
+        } else {
+            offsetToDate = OffsetDateTime.MAX;
         }
 
         fileLogStream.forEach(log -> {
-            if ((fromDate == null || log.timeLocal().isAfter(OffsetDateTime.from(fromDate))) &&
-                (toDate == null || log.timeLocal().isBefore(OffsetDateTime.from(toDate)))) {
+            if (log.timeLocal().isAfter(offsetFromDate) &&
+                log.timeLocal().isBefore(offsetToDate)) {
 
                 logReport.updateTotalRequests();
                 logReport.updateBytesSent(log.bodyBytesSent());

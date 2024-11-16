@@ -1,5 +1,7 @@
-package backend.academy;
+package backend.academy.processor;
 
+import backend.academy.LogRecord;
+import backend.academy.LogReport;
 import lombok.extern.log4j.Log4j2;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -15,7 +17,7 @@ import java.util.stream.Stream;
 public class LocalLogProcessor implements LogProcessor {
 
     @Override
-    public void processLogStream(String path, LocalDate fromDate, LocalDate toDate) {
+    public LogReport processLogStream(String path, LocalDate fromDate, LocalDate toDate) {
         String baseDir = "";
 
         try {
@@ -37,5 +39,6 @@ public class LocalLogProcessor implements LogProcessor {
         } catch (Exception ex) {
             log.error(ex.getMessage());
         }
+        return logAnalyzer.logReport();
     }
 }

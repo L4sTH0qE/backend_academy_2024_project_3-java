@@ -1,6 +1,9 @@
 package backend.academy;
 
 
+import backend.academy.processor.HttpLogProcessor;
+import backend.academy.processor.LocalLogProcessor;
+import backend.academy.processor.LogProcessor;
 import lombok.experimental.UtilityClass;
 import lombok.extern.log4j.Log4j2;
 import java.time.LocalDate;
@@ -29,8 +32,8 @@ public class AppController {
             }
 
 
-            logProcessor.processLogStream(path, fromDate, toDate);
-
+            LogReport logReport = logProcessor.processLogStream(path, fromDate, toDate);
+            System.out.println(logReport.totalRequests());
 
             // Если возникла ошибка во время работы программы.
         } catch (Exception ex) {
