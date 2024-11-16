@@ -49,8 +49,8 @@ public class Main {
 
     /// Метод для сообщения о неверно переданных аргументах.
     private static void invalidArgsExit() {
-        log.error("Analyzer requires these arguments: --path <url/glob pattern> [--from <yyyy-MM-dd'T'HH:mm:ssXXX>] " +
-            "[--to <yyyy-MM-dd'T'HH:mm:ssXXX>] [--format <markdown/adoc>]");
+        log.error("Analyzer requires these arguments: --path <url/glob pattern> [--from <yyyy-MM-dd>] " +
+            "[--to <yyyy-MM-dd>] [--format <markdown/adoc>]");
         AppController.exit();
     }
 }
