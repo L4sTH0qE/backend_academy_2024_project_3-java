@@ -15,7 +15,7 @@ import java.util.stream.Stream;
 public class LocalLogProcessor implements LogProcessor {
 
     @Override
-    public void getLogStream(String path, LocalDate fromDate, LocalDate toDate) {
+    public void processLogStream(String path, LocalDate fromDate, LocalDate toDate) {
         String baseDir = "";
 
         try {

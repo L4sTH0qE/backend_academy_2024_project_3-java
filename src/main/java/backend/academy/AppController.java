@@ -29,7 +29,7 @@ public class AppController {
             }
 
 
-            logProcessor.getLogStream(path, fromDate, toDate);
+            logProcessor.processLogStream(path, fromDate, toDate);
 
 
             // Если возникла ошибка во время работы программы.

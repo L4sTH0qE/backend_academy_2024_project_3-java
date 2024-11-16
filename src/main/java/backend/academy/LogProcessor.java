@@ -12,7 +12,7 @@ public interface LogProcessor {
     LogAnalyzer logAnalyzer = new LogAnalyzer();
 
     /// Метод для поточной обработки логов по указанному пути.
-    void getLogStream(String path, LocalDate fromDateStr, LocalDate toDateStr);
+    void processLogStream(String path, LocalDate fromDateStr, LocalDate toDateStr);
 
     /// Метод для преобразования строки лога в объект LogRecord (для обработки данных в логе).
     static LogRecord parseLogLine(String line) {

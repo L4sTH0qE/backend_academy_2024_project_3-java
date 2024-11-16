@@ -16,7 +16,7 @@ import java.util.stream.Stream;
 public class HttpLogProcessor implements LogProcessor {
 
     @Override
-    public void getLogStream(String path, LocalDate fromDate, LocalDate toDate) {
+    public void processLogStream(String path, LocalDate fromDate, LocalDate toDate) {
 
         try (HttpClient client = HttpClient.newHttpClient()) {
 
