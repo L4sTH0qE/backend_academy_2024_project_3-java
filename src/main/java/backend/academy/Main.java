@@ -10,8 +10,8 @@ import lombok.extern.log4j.Log4j2;
 public class Main {
     public static void main(String[] args) {
         String path = null;
-        LocalDate fromDateStr = null;
-        LocalDate toDateStr = null;
+        LocalDate fromDate = null;
+        LocalDate toDate = null;
         String format = "markdown";
 
         try {
@@ -19,9 +19,9 @@ public class Main {
                 if (Objects.equals(args[i], "--path")) {
                     path = args[++i];
                 } else if (Objects.equals(args[i], "--from")) {
-                    fromDateStr = LocalDate.parse(args[++i]);
+                    fromDate = LocalDate.parse(args[++i]);
                 } else if (Objects.equals(args[i], "--to")) {
-                    toDateStr = LocalDate.parse(args[++i]);
+                    toDate = LocalDate.parse(args[++i]);
                 } else if (Objects.equals(args[i], "--format")) {
                     String outputFormat = args[++i];
                     if (Objects.equals(outputFormat, "markdown") || Objects.equals(outputFormat, "adoc")) {
@@ -39,7 +39,7 @@ public class Main {
         }
 
         try {
-            AppController.start(path, fromDateStr, toDateStr, format);
+            AppController.start(path, fromDate, toDate, format);
         } catch (Exception ex) { // Если возникла ошибка во время работы программы.
             log.error("An unexpected error occurred while the program was running!");
             log.error("Details: {}", ex.getMessage());
