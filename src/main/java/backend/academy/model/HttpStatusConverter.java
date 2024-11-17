@@ -1,4 +1,4 @@
-package backend.academy;
+package backend.academy.model;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,4 +1,4 @@
-package backend.academy;
+package backend.academy.model;
 
 import com.google.common.math.Quantiles;
 import lombok.Getter;
@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 
 /// Класс, хранящий информацию для отчета, полученную при обработке логов.
 @Getter

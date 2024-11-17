@@ -1,8 +1,8 @@
 package backend.academy.processor;
 
-import backend.academy.LogAnalyzer;
-import backend.academy.LogRecord;
-import backend.academy.LogReport;
+import backend.academy.model.LogAnalyzer;
+import backend.academy.model.LogRecord;
+import backend.academy.model.LogReport;
 
 import java.time.LocalDate;
 import java.time.OffsetDateTime;

@@ -1,4 +1,4 @@
-package backend.academy;
+package backend.academy.model;
 
 import lombok.Getter;
 import java.time.LocalDate;

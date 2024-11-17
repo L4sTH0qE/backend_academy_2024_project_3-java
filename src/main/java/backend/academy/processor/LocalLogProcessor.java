@@ -1,7 +1,7 @@
 package backend.academy.processor;
 
-import backend.academy.LogRecord;
-import backend.academy.LogReport;
+import backend.academy.model.LogRecord;
+import backend.academy.model.LogReport;
 import lombok.extern.log4j.Log4j2;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
