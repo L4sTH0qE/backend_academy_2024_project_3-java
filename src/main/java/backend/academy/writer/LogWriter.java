@@ -6,7 +6,7 @@ import backend.academy.model.LogReport;
 public interface LogWriter {
 
     // Используемый для отчета перцентиль - 95-ый.
-    int percentile = 95;
+    int PERCENTILE = 95;
 
     /// Метод для создания файла с собранной по логам статистикой.
     void generateFile(LogReport logReport);

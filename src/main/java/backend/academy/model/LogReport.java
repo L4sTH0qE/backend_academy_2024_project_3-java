@@ -12,6 +12,8 @@ import lombok.Getter;
 @Getter
 public class LogReport {
 
+    private static final int MAX_LIMIT = 3;
+
     private final List<String> files = new ArrayList<>();
 
     private final List<Integer> bytesSent = new ArrayList<>();
@@ -65,7 +67,7 @@ public class LogReport {
         return statusMap.entrySet()
             .stream()
             .sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed())
-            .limit(3)
+            .limit(MAX_LIMIT)
             .toList(); // Собираем результат в список
     }
 
@@ -73,7 +75,7 @@ public class LogReport {
         return resourceMap.entrySet()
             .stream()
             .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
-            .limit(3)
+            .limit(MAX_LIMIT)
             .toList(); // Собираем результат в список
     }
 }

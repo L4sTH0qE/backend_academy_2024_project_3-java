@@ -4,7 +4,6 @@ import backend.academy.model.LogParser;
 import backend.academy.model.LogRecord;
 import backend.academy.model.LogReport;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URI;
 import java.net.http.HttpClient;
@@ -28,20 +27,16 @@ public class HttpLogProcessor implements LogProcessor {
                 .GET()
                 .build();
 
-            try {
-                try (BufferedReader reader = new BufferedReader(
-                    new InputStreamReader(client.send(request, HttpResponse.BodyHandlers.ofInputStream()).body()))) {
-                    try (Stream<String> lines = reader.lines()) {
-                        Stream<LogRecord> records = lines.map(LogParser::parseLogLine);
-                        logAnalyzer.updateLogReport(path, fromDate, toDate, records);
-                    }
+            try (BufferedReader reader = new BufferedReader(
+                new InputStreamReader(client.send(request, HttpResponse.BodyHandlers.ofInputStream()).body()))) {
+                try (Stream<String> lines = reader.lines()) {
+                    Stream<LogRecord> records = lines.map(LogParser::parseLogLine);
+                    LOG_ANALYZER.updateLogReport(path, fromDate, toDate, records);
                 }
-            } catch (IOException | InterruptedException ex) {
-                log.error(ex.getMessage());
             }
         } catch (Exception ex) {
             log.error(ex.getMessage());
         }
-        return logAnalyzer.logReport();
+        return LOG_ANALYZER.logReport();
     }
 }

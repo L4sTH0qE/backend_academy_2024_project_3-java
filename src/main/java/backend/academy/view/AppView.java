@@ -1,7 +1,7 @@
 package backend.academy.view;
 
-import lombok.experimental.UtilityClass;
 import java.util.Objects;
+import lombok.experimental.UtilityClass;
 
 /// Вспомогательный класс для выделения методов вывода в консоль, необходимых для использования в нескольких классах.
 @UtilityClass
@@ -23,6 +23,8 @@ public class AppView {
     /// Метод для вывода сообщения о записи отчета по обработке логов в файл соответственно указанному формату.
     @SuppressWarnings("RegexpSinglelineJava")
     public static void printEndMessage(String format) {
-        System.out.println("Log processing report is in: results/result." + (Objects.equals(format, "adoc") ? "adoc" : "md") + "\n");
+        System.out.println(
+            "Log processing report is in: results/result." + (Objects.equals(format, "markdown") ? "md" : "adoc")
+                + "\n");
     }
 }

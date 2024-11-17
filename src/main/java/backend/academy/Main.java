@@ -9,26 +9,31 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 @UtilityClass
 public class Main {
+
+    // Поля для формата выходного файла.
+    static final String MARKDOWN = "markdown";
+    static final String ADOC = "adoc";
+
     public static void main(String[] args) {
         String path = null;
         LocalDate fromDate = null;
         LocalDate toDate = null;
-        String format = "markdown";
+        String format = "";
 
         try {
             for (int i = 0; i < args.length; ++i) {
                 if (Objects.equals(args[i], "--path")) {
-                    path = args[++i];
+                    path = args[i + 1];
                 } else if (Objects.equals(args[i], "--from")) {
-                    fromDate = LocalDate.parse(args[++i]);
+                    fromDate = LocalDate.parse(args[i + 1]);
                 } else if (Objects.equals(args[i], "--to")) {
-                    toDate = LocalDate.parse(args[++i]);
+                    toDate = LocalDate.parse(args[i + 1]);
                 } else if (Objects.equals(args[i], "--format")) {
-                    String outputFormat = args[++i];
-                    if (Objects.equals(outputFormat, "markdown") || Objects.equals(outputFormat, "adoc")) {
-                        format = outputFormat;
+                    String outputFormat = args[i + 1];
+                    if (Objects.equals(outputFormat, ADOC)) {
+                        format = ADOC;
                     } else {
-                        System.out.println("Invalid format type. Set to default: markdown");
+                        format = MARKDOWN;
                     }
                 }
             }
@@ -50,8 +55,8 @@ public class Main {
 
     /// Метод для сообщения о неверно переданных аргументах.
     private static void invalidArgsExit() {
-        log.error("Analyzer requires these arguments: --path <url/glob pattern> [--from <yyyy-MM-dd>] " +
-            "[--to <yyyy-MM-dd>] [--format <markdown/adoc>]");
+        log.error("Analyzer requires these arguments: --path <url/glob pattern> [--from <yyyy-MM-dd>] "
+            + "[--to <yyyy-MM-dd>] [--format <markdown/adoc>]");
         AppController.exit();
     }
 }

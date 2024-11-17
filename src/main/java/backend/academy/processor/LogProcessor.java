@@ -8,7 +8,7 @@ import java.time.LocalDate;
 public interface LogProcessor {
 
     // Объект-анализатор для обработки потока логов.
-    LogAnalyzer logAnalyzer = new LogAnalyzer();
+    LogAnalyzer LOG_ANALYZER = new LogAnalyzer();
 
     /// Метод для поточной обработки логов по указанному пути.
     LogReport processLogStream(String path, LocalDate fromDateStr, LocalDate toDateStr);

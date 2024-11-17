@@ -1,14 +1,17 @@
 package backend.academy.model;
 
+import lombok.experimental.UtilityClass;
 import java.util.HashMap;
 import java.util.Map;
 
 /// Класс для хранения мапы с текстовым представлением числовых статусов ответа http-запроса.
+@SuppressWarnings("MagicNumber") // Понимаю, что плохо, но это костыль во благо человечества.
+@UtilityClass
 public class HttpStatusConverter {
 
-    private static final Map<Integer, String> HTTP_STATUS_MAP = new HashMap<>();
+    private final Map<Integer, String> HTTP_STATUS_MAP = new HashMap<>();
 
-    static {
+    public void initialiseHttpStatusConverter() {
         HTTP_STATUS_MAP.put(100, "Continue");
         HTTP_STATUS_MAP.put(101, "Switching Protocols");
         HTTP_STATUS_MAP.put(200, "OK");
@@ -51,7 +54,7 @@ public class HttpStatusConverter {
         HTTP_STATUS_MAP.put(505, "HTTP Version Not Supported");
     }
 
-    public static String convertHttpStatus(int statusCode) {
+    public String convertHttpStatus(int statusCode) {
         return HTTP_STATUS_MAP.getOrDefault(statusCode, "Unknown HTTP status code");
     }
 }

@@ -29,7 +29,7 @@ public class LocalLogProcessor implements LogProcessor {
                 paths.filter(matcher::matches).forEach(p -> {
                     try (Stream<String> lines = Files.lines(p, StandardCharsets.UTF_8)) {
                         Stream<LogRecord> records = lines.map(LogParser::parseLogLine);
-                        logAnalyzer.updateLogReport(p.toString(), fromDate, toDate, records);
+                        LOG_ANALYZER.updateLogReport(p.toString(), fromDate, toDate, records);
                     } catch (IOException ex) {
                         log.error("0");
                     }
@@ -40,6 +40,6 @@ public class LocalLogProcessor implements LogProcessor {
         } catch (Exception ex) {
             log.error(ex.getMessage());
         }
-        return logAnalyzer.logReport();
+        return LOG_ANALYZER.logReport();
     }
 }

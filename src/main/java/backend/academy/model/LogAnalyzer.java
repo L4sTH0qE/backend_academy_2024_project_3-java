@@ -33,8 +33,8 @@ public class LogAnalyzer {
         }
 
         fileLogStream.forEach(log -> {
-            if (log.timeLocal().isAfter(offsetFromDate) &&
-                log.timeLocal().isBefore(offsetToDate)) {
+            if (log.timeLocal().isAfter(offsetFromDate)
+                && log.timeLocal().isBefore(offsetToDate)) {
 
                 logReport.updateTotalRequests();
                 logReport.updateBytesSent(log.bodyBytesSent());

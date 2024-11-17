@@ -9,7 +9,6 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Map;
 import lombok.extern.log4j.Log4j2;
-import org.apache.commons.lang3.StringUtils;
 
 /// Класс, реализующий способ генерации файла формата .adoc с собранной по логам статистикой.
 @Log4j2
@@ -18,13 +17,21 @@ public class AdocLogWriter implements LogWriter {
     @Override
     public void generateFile(LogReport logReport) {
 
+        // Инициализируем мапу кодов ответа http-запроса.
+        HttpStatusConverter.initialiseHttpStatusConverter();
+
         // Путь до файла, в который будем записывать отчет.
         Path fileName = Paths.get("results", "result.adoc");
 
+        String tableTwoColumns = "[cols=\"1,1\", options=\"header\"]\n";
+        String tableThreeColumns = "[cols=\"1,1,1\", options=\"header\"]\n";
+        String tableBorder = "|===\n";
+        String tableColumn = " | ";
+
         try {
             Files.writeString(fileName, "==== Общая информация\n\n");
-            Files.writeString(fileName, "[cols=\"1,1\", options=\"header\"]\n", StandardOpenOption.APPEND);
-            Files.writeString(fileName, "|===\n", StandardOpenOption.APPEND);
+            Files.writeString(fileName, tableTwoColumns, StandardOpenOption.APPEND);
+            Files.writeString(fileName, tableBorder, StandardOpenOption.APPEND);
             Files.writeString(fileName, "| Метрика | Значение\n", StandardOpenOption.APPEND);
 
             StringBuilder files = new StringBuilder();
@@ -38,38 +45,37 @@ public class AdocLogWriter implements LogWriter {
             Files.writeString(fileName, "| Конечная дата | " + logReport.toDate() + "\n", StandardOpenOption.APPEND);
             Files.writeString(fileName, "| Количество запросов | " + logReport.totalRequests() + "\n",
                 StandardOpenOption.APPEND);
-            Files.writeString(fileName, "| Средний размер ответа | " + logReport.getBytesMedian() + "b\n",
+            Files.writeString(fileName, "| Средний размер ответа (в байтах) | " + logReport.getBytesMedian() + "\n",
                 StandardOpenOption.APPEND);
-            Files.writeString(fileName, "| 95p размера ответа | " + logReport.getBytesPercentile(percentile) + "b\n",
-                StandardOpenOption.APPEND);
-            Files.writeString(fileName, "|===\n", StandardOpenOption.APPEND);
+            Files.writeString(fileName, "| 95p размера ответа (в байтах) | " + logReport.getBytesPercentile(PERCENTILE)
+                + "\n", StandardOpenOption.APPEND);
+            Files.writeString(fileName, tableBorder, StandardOpenOption.APPEND);
 
             Files.writeString(fileName, "\n==== Запрашиваемые ресурсы\n\n", StandardOpenOption.APPEND);
-            Files.writeString(fileName, "[cols=\"1,1\", options=\"header\"]\n", StandardOpenOption.APPEND);
-            Files.writeString(fileName, "|===\n", StandardOpenOption.APPEND);
+            Files.writeString(fileName, tableTwoColumns, StandardOpenOption.APPEND);
+            Files.writeString(fileName, tableBorder, StandardOpenOption.APPEND);
             Files.writeString(fileName, "| Ресурс | Количество\n", StandardOpenOption.APPEND);
 
             for (Map.Entry<String, Integer> resource : logReport.getMostFrequentResources()) {
                 Files.writeString(fileName, "| `" + resource.getKey() + "` | " + resource.getValue() + "\n",
                     StandardOpenOption.APPEND);
             }
-            Files.writeString(fileName, "|===\n", StandardOpenOption.APPEND);
+            Files.writeString(fileName, tableBorder, StandardOpenOption.APPEND);
 
             Files.writeString(fileName, "\n==== Коды ответа\n\n", StandardOpenOption.APPEND);
-            Files.writeString(fileName, "[cols=\"1,1\", options=\"header\"]\n", StandardOpenOption.APPEND);
-            Files.writeString(fileName, "|===\n", StandardOpenOption.APPEND);
+            Files.writeString(fileName, tableThreeColumns, StandardOpenOption.APPEND);
+            Files.writeString(fileName, tableBorder, StandardOpenOption.APPEND);
             Files.writeString(fileName, "| Код | Имя | Количество\n", StandardOpenOption.APPEND);
 
             for (Map.Entry<Integer, Integer> status : logReport.getMostFrequentStatuses()) {
                 Files.writeString(fileName,
-                    "| " + status.getKey() + " | " + HttpStatusConverter.convertHttpStatus(status.getKey()) + " | " +
-                        status.getValue() + "\n", StandardOpenOption.APPEND);
+                    "| " + status.getKey() + tableColumn + HttpStatusConverter.convertHttpStatus(status.getKey())
+                        + tableColumn + status.getValue() + "\n", StandardOpenOption.APPEND);
             }
-            Files.writeString(fileName, "|===\n", StandardOpenOption.APPEND);
+            Files.writeString(fileName, tableBorder, StandardOpenOption.APPEND);
 
         } catch (IOException ex) {
             log.error(ex.getMessage());
-            StringUtils.repeat("*", 10);
         }
     }
 }
