@@ -22,7 +22,7 @@ public class MarkdownLogWriter implements LogWriter {
         HttpStatusConverter.initialiseHttpStatusConverter();
 
         // Путь до файла, в который будем записывать отчет.
-        Path fileName = Paths.get("results", "result.md");
+        Path fileName = Paths.get("result.md");
 
         String tableEndLine = " |\n";
         String tableColumn = " | ";

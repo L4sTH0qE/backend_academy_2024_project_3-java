@@ -21,7 +21,7 @@ public class AdocLogWriter implements LogWriter {
         HttpStatusConverter.initialiseHttpStatusConverter();
 
         // Путь до файла, в который будем записывать отчет.
-        Path fileName = Paths.get("results", "result.adoc");
+        Path fileName = Paths.get("result.adoc");
 
         String tableTwoColumns = "[cols=\"1,1\", options=\"header\"]\n";
         String tableThreeColumns = "[cols=\"1,1,1\", options=\"header\"]\n";

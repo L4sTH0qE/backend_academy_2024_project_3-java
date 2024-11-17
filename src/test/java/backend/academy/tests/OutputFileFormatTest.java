@@ -18,8 +18,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 /// Проверка формата и содержимого выходного отчета.
 public class OutputFileFormatTest {
 
-    static final Path MARKDOWN_PATH = Paths.get("results", "result.md");
-    static final Path ADOC_PATH = Paths.get("results", "result.adoc");
+    static final Path MARKDOWN_PATH = Paths.get("result.md");
+    static final Path ADOC_PATH = Paths.get("result.adoc");
 
     static LogWriter markdownLogWriter = new MarkdownLogWriter();
     static LogWriter adocLogWriter = new AdocLogWriter();
