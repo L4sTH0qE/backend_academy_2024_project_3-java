@@ -1,5 +1,6 @@
 package backend.academy.processor;
 
+import backend.academy.model.LogParser;
 import backend.academy.model.LogRecord;
 import backend.academy.model.LogReport;
 import lombok.extern.log4j.Log4j2;
@@ -27,7 +28,7 @@ public class LocalLogProcessor implements LogProcessor {
             try (Stream<Path> paths = Files.walk(baseDirPath)) {
                 paths.filter(matcher::matches).forEach(p -> {
                     try (Stream<String> lines = Files.lines(p, StandardCharsets.UTF_8)) {
-                        Stream<LogRecord> records = lines.map(LogProcessor::parseLogLine);
+                        Stream<LogRecord> records = lines.map(LogParser::parseLogLine);
                         logAnalyzer.updateLogReport(p.toString(), fromDate, toDate, records);
                     } catch (IOException ex) {
                         log.error("0");

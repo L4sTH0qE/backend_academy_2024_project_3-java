@@ -2,6 +2,7 @@ package backend.academy;
 
 import java.time.LocalDate;
 import java.util.Objects;
+import backend.academy.controller.AppController;
 import lombok.experimental.UtilityClass;
 import lombok.extern.log4j.Log4j2;
 

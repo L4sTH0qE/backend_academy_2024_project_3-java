@@ -1,5 +1,6 @@
 package backend.academy.processor;
 
+import backend.academy.model.LogParser;
 import backend.academy.model.LogRecord;
 import backend.academy.model.LogReport;
 import lombok.extern.log4j.Log4j2;
@@ -31,7 +32,7 @@ public class HttpLogProcessor implements LogProcessor {
                 try (BufferedReader reader = new BufferedReader(
                     new InputStreamReader(client.send(request, HttpResponse.BodyHandlers.ofInputStream()).body()))) {
                     try (Stream<String> lines = reader.lines()) {
-                        Stream<LogRecord> records = lines.map(LogProcessor::parseLogLine);
+                        Stream<LogRecord> records = lines.map(LogParser::parseLogLine);
                         logAnalyzer.updateLogReport(path, fromDate, toDate, records);
                     }
                 }

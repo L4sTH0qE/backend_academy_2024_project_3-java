@@ -1,6 +1,7 @@
-package backend.academy;
+package backend.academy.controller;
 
 
+import backend.academy.view.AppView;
 import backend.academy.model.LogReport;
 import backend.academy.processor.HttpLogProcessor;
 import backend.academy.processor.LocalLogProcessor;

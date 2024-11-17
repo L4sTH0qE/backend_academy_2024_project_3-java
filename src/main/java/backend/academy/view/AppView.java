@@ -1,4 +1,4 @@
-package backend.academy;
+package backend.academy.view;
 
 import lombok.experimental.UtilityClass;
 
