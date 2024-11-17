@@ -3,7 +3,6 @@ package backend.academy.processor;
 import backend.academy.model.LogParser;
 import backend.academy.model.LogRecord;
 import backend.academy.model.LogReport;
-import lombok.extern.log4j.Log4j2;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -13,6 +12,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.time.LocalDate;
 import java.util.stream.Stream;
+import lombok.extern.log4j.Log4j2;
 
 /// Класс для чтения веб-файла и получения из него потока с логами.
 @Log4j2

@@ -1,8 +1,8 @@
 package backend.academy;
 
+import backend.academy.controller.AppController;
 import java.time.LocalDate;
 import java.util.Objects;
-import backend.academy.controller.AppController;
 import lombok.experimental.UtilityClass;
 import lombok.extern.log4j.Log4j2;
 
@@ -44,8 +44,8 @@ public class Main {
         } catch (Exception ex) { // Если возникла ошибка во время работы программы.
             log.error("An unexpected error occurred while the program was running!");
             log.error("Details: {}", ex.getMessage());
-            AppController.exit();
         }
+        AppController.exit();
     }
 
     /// Метод для сообщения о неверно переданных аргументах.

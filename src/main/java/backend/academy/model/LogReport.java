@@ -1,13 +1,12 @@
 package backend.academy.model;
 
 import com.google.common.math.Quantiles;
-import lombok.Getter;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.Getter;
 
 /// Класс, хранящий информацию для отчета, полученную при обработке логов.
 @Getter
@@ -64,17 +63,17 @@ public class LogReport {
 
     public List<Map.Entry<Integer, Integer>> getMostFrequentStatuses() {
         return statusMap.entrySet()
-                .stream()
-                .sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed())
-                .limit(3)
-                .toList(); // Собираем результат в список
+            .stream()
+            .sorted(Map.Entry.<Integer, Integer>comparingByValue().reversed())
+            .limit(3)
+            .toList(); // Собираем результат в список
     }
 
     public List<Map.Entry<String, Integer>> getMostFrequentResources() {
         return resourceMap.entrySet()
-                .stream()
-                .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
-                .limit(3)
-                .toList(); // Собираем результат в список
+            .stream()
+            .sorted(Map.Entry.<String, Integer>comparingByValue().reversed())
+            .limit(3)
+            .toList(); // Собираем результат в список
     }
 }

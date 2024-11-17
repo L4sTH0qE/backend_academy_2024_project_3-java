@@ -2,7 +2,6 @@ package backend.academy.processor;
 
 import backend.academy.model.LogAnalyzer;
 import backend.academy.model.LogReport;
-
 import java.time.LocalDate;
 
 /// Интерфейс для алгоритма чтения файлов и получения из них потока с логами.

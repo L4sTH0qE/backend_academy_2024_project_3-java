@@ -1,10 +1,10 @@
 package backend.academy.model;
 
-import lombok.Getter;
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
 import java.util.stream.Stream;
+import lombok.Getter;
 
 /// Класс для формирования LogReport по потоку логов.
 @Getter

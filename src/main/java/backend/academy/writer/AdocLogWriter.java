@@ -2,14 +2,14 @@ package backend.academy.writer;
 
 import backend.academy.model.HttpStatusConverter;
 import backend.academy.model.LogReport;
-import lombok.extern.log4j.Log4j2;
-import org.apache.commons.lang3.StringUtils;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Map;
+import lombok.extern.log4j.Log4j2;
+import org.apache.commons.lang3.StringUtils;
 
 /// Класс, реализующий способ генерации файла формата .adoc с собранной по логам статистикой.
 @Log4j2

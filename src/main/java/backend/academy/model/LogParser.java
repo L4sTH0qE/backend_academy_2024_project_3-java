@@ -1,9 +1,9 @@
 package backend.academy.model;
 
-import lombok.experimental.UtilityClass;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
+import lombok.experimental.UtilityClass;
 
 /// Класс для парсинга строки лог-файла.
 @UtilityClass

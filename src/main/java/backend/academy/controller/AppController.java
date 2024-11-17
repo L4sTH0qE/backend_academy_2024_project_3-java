@@ -1,18 +1,17 @@
 package backend.academy.controller;
 
-
-import backend.academy.view.AppView;
 import backend.academy.model.LogReport;
 import backend.academy.processor.HttpLogProcessor;
 import backend.academy.processor.LocalLogProcessor;
 import backend.academy.processor.LogProcessor;
+import backend.academy.view.AppView;
 import backend.academy.writer.AdocLogWriter;
 import backend.academy.writer.LogWriter;
 import backend.academy.writer.MarkdownLogWriter;
-import lombok.experimental.UtilityClass;
-import lombok.extern.log4j.Log4j2;
 import java.time.LocalDate;
 import java.util.Objects;
+import lombok.experimental.UtilityClass;
+import lombok.extern.log4j.Log4j2;
 
 /// Основной класс для работы с меню приложения.
 @Log4j2
@@ -52,6 +51,9 @@ public class AppController {
 
             // Записываем статистику в файл.
             logWriter.generateFile(logReport);
+
+            // Выводим сообщение о результате работы.
+            AppView.printEndMessage(format);
 
             // Если возникла ошибка во время работы программы.
         } catch (Exception ex) {
