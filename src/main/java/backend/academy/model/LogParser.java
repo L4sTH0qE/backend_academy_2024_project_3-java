@@ -3,11 +3,30 @@ package backend.academy.model;
 import java.time.OffsetDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
+import lombok.Getter;
 import lombok.experimental.UtilityClass;
 
 /// Класс для парсинга строки лог-файла.
 @UtilityClass
 public class LogParser {
+
+    /// Перечисление для элементов лога.
+    @Getter public enum LogIndex {
+        REMOTE_ADDR(0),
+        REMOTE_USER(2),
+        TIME_LOCAL(3),
+        REQUEST(4),
+        STATUS(5),
+        BODY_BYTES_SENT(6),
+        HTTP_REFERER(7),
+        HTTP_USER_AGENT(8);
+
+        private final int index;
+
+        LogIndex(int index) {
+            this.index = index;
+        }
+    }
 
     /// Метод для преобразования строки лога в объект LogRecord (для обработки данных в логе).
     public LogRecord parseLogLine(String line) {
@@ -29,29 +48,19 @@ public class LogParser {
             }
         }
 
-        // Индексы для обращения к конкретным частям массива частей строк лога.
-        final int remoteAddrId = 0;
-        final int remoteUserId = 2;
-        final int timeLocalId = 3;
-        final int requestId = 4;
-        final int statusId = 5;
-        final int bodyBytesSentId = 6;
-        final int httpRefererId = 7;
-        final int httpUserAgentId = 8;
-
         // Паттерн для времени в строке лога.
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MMM/yyyy:HH:mm:ss xx", Locale.ENGLISH);
 
         // Задаем переменные для LogRecord.
-        String remoteAddr = logData[remoteAddrId];
-        String remoteUser = logData[remoteUserId];
+        String remoteAddr = logData[LogIndex.REMOTE_ADDR.index()];
+        String remoteUser = logData[LogIndex.REMOTE_USER.index()];
         OffsetDateTime timeLocal =
-            OffsetDateTime.parse(logData[timeLocalId], formatter);
-        String request = logData[requestId];
-        int status = Integer.parseInt(logData[statusId]);
-        int bodyBytesSent = Integer.parseInt(logData[bodyBytesSentId]);
-        String httpReferer = logData[httpRefererId];
-        String httpUserAgent = logData[httpUserAgentId];
+            OffsetDateTime.parse(logData[LogIndex.TIME_LOCAL.index()], formatter);
+        String request = logData[LogIndex.REQUEST.index()];
+        int status = Integer.parseInt(logData[LogIndex.STATUS.index()]);
+        int bodyBytesSent = Integer.parseInt(logData[LogIndex.BODY_BYTES_SENT.index()]);
+        String httpReferer = logData[LogIndex.HTTP_REFERER.index()];
+        String httpUserAgent = logData[LogIndex.HTTP_USER_AGENT.index()];
 
         return new LogRecord(remoteAddr, remoteUser, timeLocal, request, status, bodyBytesSent, httpReferer,
             httpUserAgent);

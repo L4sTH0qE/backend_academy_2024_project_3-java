@@ -24,9 +24,6 @@ public class MarkdownLogWriter implements LogWriter {
         // Путь до файла, в который будем записывать отчет.
         Path fileName = Paths.get("results", "result.md");
 
-        String tableTwoColumns = "[cols=\"1,1\", options=\"header\"]\n";
-        String tableThreeColumns = "[cols=\"1,1,1\", options=\"header\"]\n";
-        String tableBorder = "|===\n";
         String tableEndLine = " |\n";
         String tableColumn = " | ";
 

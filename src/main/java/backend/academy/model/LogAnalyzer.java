@@ -38,7 +38,7 @@ public class LogAnalyzer {
 
                 logReport.updateTotalRequests();
                 logReport.updateBytesSent(log.bodyBytesSent());
-                logReport.updateRequestInfo(log.status(), log.getRequestResource());
+                logReport.updateRequestInfo(log.status(), log.request().split(" ")[1]);
             }
         });
     }
