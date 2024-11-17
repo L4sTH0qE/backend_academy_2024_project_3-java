@@ -6,7 +6,6 @@ import java.time.OffsetDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Stream;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
@@ -46,8 +45,6 @@ public class LogReportTest {
         new LogRecord("217.168.17.5", "-", OffsetDateTime.MIN.plusDays(1), "GET /downloads/product_2 HTTP/1.1", 404,
             337, "-",
             "Debian APT-HTTP/1.3 (0.8.10.3)");
-
-    static Stream<LogRecord> records;
 
     @BeforeAll
     static void initialiseStream() {
