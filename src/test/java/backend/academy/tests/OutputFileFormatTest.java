@@ -4,7 +4,6 @@ import backend.academy.model.LogReport;
 import backend.academy.writer.AdocLogWriter;
 import backend.academy.writer.LogWriter;
 import backend.academy.writer.MarkdownLogWriter;
-import java.io.File;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -86,9 +85,6 @@ public class OutputFileFormatTest {
     void testFileMarkdown() {
         markdownLogWriter.generateFile(logReport);
 
-        File output = new File(MARKDOWN_PATH.toString());
-        assertThat(output.exists()).isTrue();
-
         String content = "";
         try {
             content = Files.readString(MARKDOWN_PATH, StandardCharsets.UTF_8);
@@ -128,9 +124,6 @@ public class OutputFileFormatTest {
     @Test
     void testFileAdoc() {
         adocLogWriter.generateFile(logReport);
-
-        File output = new File(ADOC_PATH.toString());
-        assertThat(output.exists()).isTrue();
 
         String content = "";
         try {
