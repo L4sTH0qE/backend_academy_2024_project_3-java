@@ -10,9 +10,13 @@ import lombok.Getter;
 @Getter
 public class LogAnalyzer {
 
-    private final LogReport logReport = new LogReport();
+    private LogReport logReport = null;
 
     public void updateLogReport(String file, LocalDate fromDate, LocalDate toDate, Stream<LogRecord> fileLogStream) {
+
+        if (logReport == null) {
+            logReport = new LogReport();
+        }
 
         logReport.updateFiles(file);
 

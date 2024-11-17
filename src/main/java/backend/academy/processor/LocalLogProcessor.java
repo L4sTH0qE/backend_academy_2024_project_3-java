@@ -31,14 +31,16 @@ public class LocalLogProcessor implements LogProcessor {
                         Stream<LogRecord> records = lines.map(LogParser::parseLogLine);
                         LOG_ANALYZER.updateLogReport(p.toString(), fromDate, toDate, records);
                     } catch (IOException ex) {
-                        log.error("0");
+                        log.error(ex.getMessage());
                     }
                 });
-            } catch (IOException ex) {
+            } catch (Exception ex) {
                 log.error(ex.getMessage());
+                return null;
             }
         } catch (Exception ex) {
             log.error(ex.getMessage());
+            return null;
         }
         return LOG_ANALYZER.logReport();
     }

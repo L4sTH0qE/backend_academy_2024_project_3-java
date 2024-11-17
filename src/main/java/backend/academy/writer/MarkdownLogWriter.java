@@ -47,9 +47,11 @@ public class MarkdownLogWriter implements LogWriter {
             files.deleteCharAt(files.length() - 1);
 
             Files.writeString(fileName, "| Файл(-ы) | " + files + tableEndLine, StandardOpenOption.APPEND);
-            Files.writeString(fileName, "| Начальная дата | " + logReport.fromDate() + tableEndLine,
+            Files.writeString(fileName,
+                "| Начальная дата | " + (logReport.fromDate() == null ? "-" : logReport.fromDate()) + tableEndLine,
                 StandardOpenOption.APPEND);
-            Files.writeString(fileName, "| Конечная дата | " + logReport.toDate() + tableEndLine,
+            Files.writeString(fileName,
+                "| Конечная дата | " + (logReport.toDate() == null ? "-" : logReport.toDate()) + tableEndLine,
                 StandardOpenOption.APPEND);
 
             Files.writeString(fileName, "| Количество запросов | " + logReport.totalRequests() + tableEndLine,

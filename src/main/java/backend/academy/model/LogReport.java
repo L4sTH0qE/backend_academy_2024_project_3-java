@@ -22,9 +22,9 @@ public class LogReport {
 
     private final Map<String, Integer> resourceMap = new HashMap<>();
 
-    private String fromDate = "-";
+    private LocalDate fromDate;
 
-    private String toDate = "-";
+    private LocalDate toDate;
 
     private int totalRequests = 0;
 
@@ -33,11 +33,11 @@ public class LogReport {
     }
 
     public void updateFromDate(LocalDate fromDate) {
-        this.fromDate = fromDate.toString();
+        this.fromDate = fromDate;
     }
 
     public void updateToDate(LocalDate toDate) {
-        this.toDate = toDate.toString();
+        this.toDate = toDate;
     }
 
     public void updateTotalRequests() {

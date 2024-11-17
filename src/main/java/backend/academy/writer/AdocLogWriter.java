@@ -36,13 +36,17 @@ public class AdocLogWriter implements LogWriter {
 
             StringBuilder files = new StringBuilder();
             for (String logFile : logReport.files()) {
-                files.append("`").append(logFile).append("`").append(", ");
+                files.append('`').append(logFile).append('`').append(", ");
             }
             files.deleteCharAt(files.length() - 2);
 
             Files.writeString(fileName, "| Файл(-ы) | " + files + "\n", StandardOpenOption.APPEND);
-            Files.writeString(fileName, "| Начальная дата | " + logReport.fromDate() + "\n", StandardOpenOption.APPEND);
-            Files.writeString(fileName, "| Конечная дата | " + logReport.toDate() + "\n", StandardOpenOption.APPEND);
+            Files.writeString(fileName,
+                "| Начальная дата | " + (logReport.fromDate() == null ? "-" : logReport.fromDate()) + "\n",
+                StandardOpenOption.APPEND);
+            Files.writeString(fileName,
+                "| Конечная дата | " + (logReport.toDate() == null ? "-" : logReport.toDate()) + "\n",
+                StandardOpenOption.APPEND);
             Files.writeString(fileName, "| Количество запросов | " + logReport.totalRequests() + "\n",
                 StandardOpenOption.APPEND);
             Files.writeString(fileName, "| Средний размер ответа (в байтах) | " + logReport.getBytesMedian() + "\n",

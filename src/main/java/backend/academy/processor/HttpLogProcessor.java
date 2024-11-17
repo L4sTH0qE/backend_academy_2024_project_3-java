@@ -9,6 +9,7 @@ import java.net.URI;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
+import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
 import java.util.stream.Stream;
 import lombok.extern.log4j.Log4j2;
@@ -28,7 +29,8 @@ public class HttpLogProcessor implements LogProcessor {
                 .build();
 
             try (BufferedReader reader = new BufferedReader(
-                new InputStreamReader(client.send(request, HttpResponse.BodyHandlers.ofInputStream()).body()))) {
+                new InputStreamReader(client.send(request, HttpResponse.BodyHandlers.ofInputStream()).body(),
+                    StandardCharsets.UTF_8))) {
                 try (Stream<String> lines = reader.lines()) {
                     Stream<LogRecord> records = lines.map(LogParser::parseLogLine);
                     LOG_ANALYZER.updateLogReport(path, fromDate, toDate, records);
@@ -36,6 +38,7 @@ public class HttpLogProcessor implements LogProcessor {
             }
         } catch (Exception ex) {
             log.error(ex.getMessage());
+            return null;
         }
         return LOG_ANALYZER.logReport();
     }

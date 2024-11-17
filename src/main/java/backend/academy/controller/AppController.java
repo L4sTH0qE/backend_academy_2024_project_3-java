@@ -42,6 +42,11 @@ public class AppController {
             // Собираем статистику по логам.
             LogReport logReport = logProcessor.processLogStream(path, fromDate, toDate);
 
+            // Если не получилось прочитать файл с логами - выходим из программы.
+            if (logReport == null) {
+                exit();
+            }
+
             // Создаем объект писателя в зависимости от формата выходного файла.
             if (Objects.equals(format, "adoc")) {
                 logWriter = new AdocLogWriter();
