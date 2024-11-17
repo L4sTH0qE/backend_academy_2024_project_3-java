@@ -46,6 +46,8 @@ public class LogParser {
             for (int i = 0; i < matcher.groupCount(); i++) {
                 logData[i] = matcher.group(i + 1);
             }
+        } else {
+            return null;
         }
 
         // Паттерн для времени в строке лога.

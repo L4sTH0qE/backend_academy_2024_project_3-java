@@ -37,7 +37,7 @@ public class LogAnalyzer {
         }
 
         fileLogStream.forEach(log -> {
-            if (log.timeLocal().isAfter(offsetFromDate)
+            if (log != null && log.timeLocal().isAfter(offsetFromDate)
                 && log.timeLocal().isBefore(offsetToDate)) {
 
                 logReport.updateTotalRequests();
