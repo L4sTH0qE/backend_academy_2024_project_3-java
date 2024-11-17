@@ -57,7 +57,7 @@ public class MarkdownLogWriter implements LogWriter {
             Files.writeString(fileName, "| Количество запросов | " + logReport.totalRequests() + tableEndLine,
                 StandardOpenOption.APPEND);
             Files.writeString(fileName,
-                "| Средний размер ответа (в байтах) | " + logReport.getBytesMedian() + tableEndLine,
+                "| Средний размер ответа (в байтах) | " + logReport.getBytesMean() + tableEndLine,
                 StandardOpenOption.APPEND);
             Files.writeString(fileName,
                 "| 95p размера ответа (в байтах) | " + logReport.getBytesPercentile(PERCENTILE) + tableEndLine,

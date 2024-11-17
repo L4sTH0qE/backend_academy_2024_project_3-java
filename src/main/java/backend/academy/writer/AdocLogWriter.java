@@ -49,7 +49,7 @@ public class AdocLogWriter implements LogWriter {
                 StandardOpenOption.APPEND);
             Files.writeString(fileName, "| Количество запросов | " + logReport.totalRequests() + "\n",
                 StandardOpenOption.APPEND);
-            Files.writeString(fileName, "| Средний размер ответа (в байтах) | " + logReport.getBytesMedian() + "\n",
+            Files.writeString(fileName, "| Средний размер ответа (в байтах) | " + logReport.getBytesMean() + "\n",
                 StandardOpenOption.APPEND);
             Files.writeString(fileName, "| 95p размера ответа (в байтах) | " + logReport.getBytesPercentile(PERCENTILE)
                 + "\n", StandardOpenOption.APPEND);

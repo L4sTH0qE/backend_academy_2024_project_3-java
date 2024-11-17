@@ -18,7 +18,7 @@ public class Main {
         String path = null;
         LocalDate fromDate = null;
         LocalDate toDate = null;
-        String format = "";
+        String format = MARKDOWN;
 
         try {
             for (int i = 0; i < args.length; ++i) {
@@ -32,8 +32,6 @@ public class Main {
                     String outputFormat = args[i + 1];
                     if (Objects.equals(outputFormat, ADOC)) {
                         format = ADOC;
-                    } else {
-                        format = MARKDOWN;
                     }
                 }
             }

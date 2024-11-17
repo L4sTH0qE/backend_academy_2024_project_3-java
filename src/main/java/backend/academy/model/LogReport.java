@@ -1,6 +1,7 @@
 package backend.academy.model;
 
 import com.google.common.math.Quantiles;
+import com.google.common.math.Stats;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,8 +54,8 @@ public class LogReport {
         resourceMap.put(resource, resourceMap.getOrDefault(resource, 0) + 1);
     }
 
-    public int getBytesMedian() {
-        double result = Quantiles.median().compute(bytesSent);
+    public int getBytesMean() {
+        double result = Stats.meanOf(bytesSent);
         return (int) result;
     }
 
