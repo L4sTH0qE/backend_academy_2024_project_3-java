@@ -5,8 +5,10 @@ import com.google.common.math.Stats;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import lombok.Getter;
 
 /// Класс, хранящий информацию для отчета, полученную при обработке логов.
@@ -16,6 +18,8 @@ public class LogReport {
     private static final int MAX_LIMIT = 3;
 
     private final List<String> files = new ArrayList<>();
+
+    private final Set<String> remoteAddresses = new HashSet<>();
 
     private final List<Integer> bytesSent = new ArrayList<>();
 
@@ -31,6 +35,10 @@ public class LogReport {
 
     public void updateFiles(String file) {
         files.add(file);
+    }
+
+    public void updateRemoteAddresses(String remoteAddr) {
+        remoteAddresses.add(remoteAddr);
     }
 
     public void updateFromDate(LocalDate fromDate) {

@@ -53,6 +53,9 @@ public class AdocLogWriter implements LogWriter {
                 StandardOpenOption.APPEND);
             Files.writeString(fileName, "| 95p размера ответа (в байтах) | " + logReport.getBytesPercentile(PERCENTILE)
                 + "\n", StandardOpenOption.APPEND);
+            Files.writeString(fileName,
+                "| Количество разных клиентов (ip-адресов) | " + logReport.remoteAddresses().size() + "\n",
+                StandardOpenOption.APPEND);
             Files.writeString(fileName, tableBorder, StandardOpenOption.APPEND);
 
             Files.writeString(fileName, "\n==== Запрашиваемые ресурсы\n\n", StandardOpenOption.APPEND);

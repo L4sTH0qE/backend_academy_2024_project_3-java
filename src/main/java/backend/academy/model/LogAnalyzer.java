@@ -41,6 +41,7 @@ public class LogAnalyzer {
                 && log.timeLocal().isBefore(offsetToDate)) {
 
                 logReport.updateTotalRequests();
+                logReport.updateRemoteAddresses(log.remoteAddr());
                 logReport.updateBytesSent(log.bodyBytesSent());
                 logReport.updateRequestInfo(log.status(), log.request().split(" ")[1]);
             }

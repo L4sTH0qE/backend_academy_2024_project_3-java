@@ -53,6 +53,10 @@ public class OutputFileFormatTest {
         logReport.updateRequestInfo(200, "/downloads/product_2");
         logReport.updateRequestInfo(304, "/downloads/product_1");
         logReport.updateRequestInfo(404, "/downloads/product_2");
+
+        logReport.updateRemoteAddresses("93.180.71.3");
+        logReport.updateRemoteAddresses("80.91.33.133");
+        logReport.updateRemoteAddresses("217.168.17.5");
     }
 
     @BeforeEach
@@ -103,6 +107,7 @@ public class OutputFileFormatTest {
             | Количество запросов | 7 |
             | Средний размер ответа (в байтах) | 188 |
             | 95p размера ответа (в байтах) | 490 |
+            | Количество разных клиентов (ip-адресов) | 3 |
 
             #### Запрашиваемые ресурсы
 
@@ -143,6 +148,7 @@ public class OutputFileFormatTest {
             | Количество запросов | 7
             | Средний размер ответа (в байтах) | 188
             | 95p размера ответа (в байтах) | 490
+            | Количество разных клиентов (ip-адресов) | 3
             |===
 
             ==== Запрашиваемые ресурсы

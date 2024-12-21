@@ -62,6 +62,9 @@ public class MarkdownLogWriter implements LogWriter {
             Files.writeString(fileName,
                 "| 95p размера ответа (в байтах) | " + logReport.getBytesPercentile(PERCENTILE) + tableEndLine,
                 StandardOpenOption.APPEND);
+            Files.writeString(fileName,
+                "| Количество разных клиентов (ip-адресов) | " + logReport.remoteAddresses().size() + tableEndLine,
+                StandardOpenOption.APPEND);
 
             Files.writeString(fileName, "\n#### Запрашиваемые ресурсы\n\n", StandardOpenOption.APPEND);
             Files.writeString(fileName, "| Ресурс | Количество |\n", StandardOpenOption.APPEND);
