@@ -1,5 +1,6 @@
 package backend.academy.view;
 
+import backend.academy.model.FileFormat;
 import java.util.Objects;
 import lombok.experimental.UtilityClass;
 
@@ -22,9 +23,10 @@ public class AppView {
 
     /// Метод для вывода сообщения о записи отчета по обработке логов в файл соответственно указанному формату.
     @SuppressWarnings("RegexpSinglelineJava")
-    public static void printEndMessage(String format) {
+    public static void printEndMessage(FileFormat format) {
         System.out.println(
-            "Log processing report is in: results/result." + (Objects.equals(format, "markdown") ? "md" : "adoc")
+            "Log processing report is in: result."
+                + (Objects.equals(format.formatName(), FileFormat.MARKDOWN.formatName()) ? "md" : "adoc")
                 + "\n");
     }
 }

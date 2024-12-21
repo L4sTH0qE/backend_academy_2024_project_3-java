@@ -1,5 +1,6 @@
 package backend.academy.controller;
 
+import backend.academy.model.FileFormat;
 import backend.academy.model.LogReport;
 import backend.academy.processor.HttpLogProcessor;
 import backend.academy.processor.LocalLogProcessor;
@@ -18,21 +19,16 @@ import lombok.extern.log4j.Log4j2;
 @UtilityClass
 public class AppController {
 
-    // Объект для потокового чтения источника
-    LogProcessor logProcessor;
-
-    // Объект для формирования файла-отчета по логам.
-    LogWriter logWriter;
-
     /// Метод для отображения окна входа в программу.
     @SuppressWarnings("RegexpSinglelineJava")
-    public static void start(String path, LocalDate fromDate, LocalDate toDate, String format) {
+    public static void start(String path, LocalDate fromDate, LocalDate toDate, FileFormat format) {
         try {
             AppView.clear();
             String lowerCasePath = path.trim().toLowerCase();
             boolean isWeb = lowerCasePath.startsWith("http://") || lowerCasePath.startsWith("https://");
 
             // Создаем объект анализатора в зависимости от того, берем ли мы логи локально или из сети.
+            LogProcessor logProcessor;
             if (isWeb) {
                 logProcessor = new HttpLogProcessor();
             } else {
@@ -48,7 +44,8 @@ public class AppController {
             }
 
             // Создаем объект писателя в зависимости от формата выходного файла.
-            if (Objects.equals(format, "adoc")) {
+            LogWriter logWriter;
+            if (Objects.equals(format.formatName(), FileFormat.ADOC.formatName())) {
                 logWriter = new AdocLogWriter();
             } else {
                 logWriter = new MarkdownLogWriter();

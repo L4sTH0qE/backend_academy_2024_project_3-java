@@ -1,5 +1,6 @@
 package backend.academy.processor;
 
+import backend.academy.model.LogAnalyzer;
 import backend.academy.model.LogParser;
 import backend.academy.model.LogRecord;
 import backend.academy.model.LogReport;
@@ -21,6 +22,9 @@ public class HttpLogProcessor implements LogProcessor {
     @Override
     public LogReport processLogStream(String path, LocalDate fromDate, LocalDate toDate) {
 
+        // Объект-анализатор для обработки потока логов.
+        LogAnalyzer logAnalyzer = new LogAnalyzer();
+
         try (HttpClient client = HttpClient.newHttpClient()) {
 
             HttpRequest request = HttpRequest.newBuilder()
@@ -33,13 +37,13 @@ public class HttpLogProcessor implements LogProcessor {
                     StandardCharsets.UTF_8))) {
                 try (Stream<String> lines = reader.lines()) {
                     Stream<LogRecord> records = lines.map(LogParser::parseLogLine);
-                    LOG_ANALYZER.updateLogReport(path, fromDate, toDate, records);
+                    logAnalyzer.updateLogReport(path, fromDate, toDate, records);
                 }
             }
         } catch (Exception ex) {
             log.error(ex.getMessage());
             return null;
         }
-        return LOG_ANALYZER.logReport();
+        return logAnalyzer.logReport();
     }
 }

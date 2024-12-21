@@ -1,5 +1,6 @@
 package backend.academy.processor;
 
+import backend.academy.model.LogAnalyzer;
 import backend.academy.model.LogParser;
 import backend.academy.model.LogRecord;
 import backend.academy.model.LogReport;
@@ -19,7 +20,11 @@ public class LocalLogProcessor implements LogProcessor {
 
     @Override
     public LogReport processLogStream(String path, LocalDate fromDate, LocalDate toDate) {
+
         String baseDir = "";
+
+        // Объект-анализатор для обработки потока логов.
+        LogAnalyzer logAnalyzer = new LogAnalyzer();
 
         try {
             Path baseDirPath = Paths.get(baseDir).normalize();
@@ -29,7 +34,7 @@ public class LocalLogProcessor implements LogProcessor {
                 paths.filter(matcher::matches).forEach(p -> {
                     try (Stream<String> lines = Files.lines(p, StandardCharsets.UTF_8)) {
                         Stream<LogRecord> records = lines.map(LogParser::parseLogLine);
-                        LOG_ANALYZER.updateLogReport(p.toString(), fromDate, toDate, records);
+                        logAnalyzer.updateLogReport(p.toString(), fromDate, toDate, records);
                     } catch (IOException ex) {
                         log.error(ex.getMessage());
                     }
@@ -42,6 +47,6 @@ public class LocalLogProcessor implements LogProcessor {
             log.error(ex.getMessage());
             return null;
         }
-        return LOG_ANALYZER.logReport();
+        return logAnalyzer.logReport();
     }
 }
